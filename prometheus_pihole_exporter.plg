@@ -1,0 +1,70 @@
+<?xml version='1.0' standalone='yes'?>
+<!DOCTYPE PLUGIN [
+  <!ENTITY name      "prometheus_pihole_exporter">
+  <!ENTITY author    "ich777">
+  <!ENTITY version   "2021.06.28">
+  <!ENTITY launch    "Settings/pihole_exporter">
+  <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
+  <!ENTITY pluginURL "&gitURL;/&name;.plg">
+  <!ENTITY md5       "0b66b009c65e2b527d1b219feaf8f251">
+  <!ENTITY plugin    "/boot/config/plugins/&name;">
+  <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
+]>
+
+<PLUGIN  name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/92865-support-ich777-nvidiadvbzfsiscsimft-kernel-helperbuilder-docker/">
+
+<CHANGES>
+
+###2021.06.28
+- Initial release - based on version v0.0.11
+
+</CHANGES>
+
+<FILE Run="/bin/bash">
+<INLINE>
+rm -f $(ls /boot/config/plugins/&name;/&name;*.txz 2>/dev/null|grep -v '&version;')
+</INLINE>
+</FILE>
+
+<FILE Name="/boot/config/plugins/&name;/&name;-&version;.txz" Run="upgradepkg --install-new">
+<URL>&gitURL;/packages/&name;-&version;.txz</URL>
+<MD5>&md5;</MD5>
+</FILE>
+
+<FILE Name="&emhttp;/README.md">
+<INLINE>
+**Prometheus Pi-Hole Exporter**
+
+Is a slim plugin, that takes informations gathered from the Pi-Hole API and provides it to a Prometheus database. Usage is not limited to Prometheus only. Data can be formated and displayed to any database or graphical node.  
+Export URL: The URL for the exportet metrics is: 'http://YOURunRAIDIP:9617/metrics' (to use it in Prometheus add the target: 'YOURunRAIDIP:9586' to your Prometheus yaml).  
+This Plugin is based on pihole-exporter from eko: https://github.com/eko/pihole-exporter
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash">
+<INLINE>
+
+echo "test"
+
+</INLINE>
+</FILE>
+
+<FILE Run="/bin/bash" Method="remove">
+<INLINE>
+
+echo "---------------------------------------------"
+echo "---Uninstalling prometheus_pihole_exporter---"
+echo "---------------------------------------------"
+# Remove plugin related files
+removepkg &name;-&version;
+rm -rf /usr/local/emhttp/plugins/&name;
+rm -rf &plugin;
+echo
+echo "------------------------------------------------------------"
+echo "---Uninstallation of prometheus_pihole_exporter complete!---"
+echo "------------------------------------------------------------"
+echo
+
+</INLINE>
+</FILE>
+</PLUGIN>
