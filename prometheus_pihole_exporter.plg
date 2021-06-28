@@ -6,7 +6,7 @@
   <!ENTITY launch    "Settings/pihole_exporter">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
   <!ENTITY pluginURL "&gitURL;/&name;.plg">
-  <!ENTITY md5       " f70ce9269f39d9c689ada7e793b763b3">
+  <!ENTITY md5       "f70ce9269f39d9c689ada7e793b763b3">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
