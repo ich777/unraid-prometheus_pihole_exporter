@@ -36,7 +36,7 @@ rm -f $(ls /boot/config/plugins/&name;/&name;*.tgz 2>/dev/null|grep -v '&version
 **Prometheus Pi-Hole Exporter**
 
 Is a slim plugin, that takes informations gathered from the Pi-Hole API and provides it to a Prometheus database. Usage is not limited to Prometheus only. Data can be formated and displayed to any database or graphical node.  
-Export URL: The URL for the exportet metrics is: 'http://YOURunRAIDIP:9617/metrics' (to use it in Prometheus add the target: 'YOURunRAIDIP:9586' to your Prometheus yaml).  
+Export URL: The URL for the exportet metrics is: 'http://YOURunRAIDIP:9617/metrics' (to use it in Prometheus add the target: 'YOURunRAIDIP:9617' to your Prometheus yaml).  
 This Plugin is based on pihole-exporter from eko: https://github.com/eko/pihole-exporter
 </INLINE>
 </FILE>
@@ -44,7 +44,33 @@ This Plugin is based on pihole-exporter from eko: https://github.com/eko/pihole-
 <FILE Run="/bin/bash">
 <INLINE>
 
-echo "test"
+#Create settings file if not found
+if [ ! -f "&plugin;/settings.cfg" ]; then
+  echo 'pihole_hostname=
+pihole_api_token=
+pihole_protocol=http
+pihole_port=80
+exporter_interval=10
+exporter_port=9617' > "&plugin;/settings.cfg"
+fi
+
+if [ -z "$(pidof prometheus_pihole_exporter)" ]; then
+  PIH_HOST="$(cat &plugin;/settings.cfg | grep "pihole_hostname=" | cut -d '=' -f2-)"
+  if [ ! -z "${PIH_HOST}" ]; then
+    PIH_API_TOKEN="$(cat &plugin;/settings.cfg | grep "pihole_api_token=" | cut -d '=' -f2-)"
+    PIH_PROTO="$(cat &plugin;/settings.cfg | grep "pihole_protocol=" | cut -d '=' -f2-)"
+    PIH_PORT="$(cat &plugin;/settings.cfg | grep "pihole_port=" | cut -d '=' -f2-)"
+    EXP_INTERV="$(cat &plugin;/settings.cfg | grep "exporter_interval=" | cut -d '=' -f2-)"
+    EXP_PORT="$(cat &plugin;/settings.cfg | grep "exporter_port=" | cut -d '=' -f2-)"
+    #Starting Prometheus Pi-Hole Exporter Daemon
+    echo
+    echo "-------------Starting Prometheus Pi-Hole Exporter!--------------"
+    echo "&emhttp;/include/prometheus_pihole_exporter_init.sh $PIH_HOST $PIH_API_TOKEN $PIH_PROTO $PIH_PORT $EXP_PORT $EXP_INTERV" | at now
+  fi
+else
+  echo
+  echo "---Nothing to do, Prometheus Pi-Hole Exporter already started---"
+fi
 
 </INLINE>
 </FILE>
@@ -56,6 +82,7 @@ echo "---------------------------------------------"
 echo "---Uninstalling prometheus_pihole_exporter---"
 echo "---------------------------------------------"
 # Remove plugin related files
+kill $(pidof prometheus_pihole_exporter) 2>/dev/null
 removepkg &name;-&version;
 rm -rf /usr/local/emhttp/plugins/&name;
 rm -rf &plugin;
