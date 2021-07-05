@@ -76,9 +76,9 @@ if (isset($status ) === true && trim($status ) === 'starting'):
 <h3><strong>Change current Configuration:</strong></h3>
 <form id="s" method="post" >
 <input type = "text" style="width: 100px;" name = "pihole_hostname" placeholder="127.0.0.1" required />
+<input type = "text" style="width: 30px;" name = "pihole_port" placeholder="80" required value=<?php print $pihole_port ?> />
 <input type = "password" style="width: 500px;" name = "pihole_api_token" data-inputmask="mask" placeholder="IE8YTGhm5T1N0GHxZUJx6ZOzN8vhCiFT7feW085ZGiyCNifiyPtzLqJJhe4mw4M9" required />
 <input type = "hidden" name = "pihole_protocol" value=<?php print $pihole_protocol ?> />
-<input type = "hidden" name = "pihole_port" value=<?php print $pihole_port ?> />
 <input type = "hidden" name = "exporter_port" value=<?php print $exporter_port ?> />
 <input type = "hidden" name = "exporter_interval" value=<?php print $exporter_interval ?> />
 <input type="submit" name="changePIHOLEconfig" value="Change & Start" />
@@ -120,9 +120,9 @@ elseif (isset($status ) === true && trim($status ) === 'running'):
 <h3><strong>Change current Configuration:</strong></h3>
 <form id="CHANGESTART" method="post" >
 <input type = "text" style="width: 100px;" name = "pihole_hostname" placeholder="127.0.0.1" required />
+<input type = "text" style="width: 30px;" name = "pihole_port" placeholder="80" required value=<?php print $pihole_port ?> />
 <input type = "password" style="width: 500px;" name = "pihole_api_token" data-inputmask="mask" placeholder="IE8YTGhm5T1N0GHxZUJx6ZOzN8vhCiFT7feW085ZGiyCNifiyPtzLqJJhe4mw4M9" required />
 <input type = "hidden" name = "pihole_protocol" value=<?php print $pihole_protocol ?> />
-<input type = "hidden" name = "pihole_port" value=<?php print $pihole_port ?> />
 <input type = "hidden" name = "exporter_port" value=<?php print $exporter_port ?> />
 <input type = "hidden" name = "exporter_interval" value=<?php print $exporter_interval ?> />
 <input type="submit" name="changePIHOLEconfig" value="Change & Start" />
@@ -135,7 +135,6 @@ else :
 <input type = "hidden" name = "pihole_hostname" value=<?php print $pihole_hostname ?> />
 <input type = "hidden" name = "pihole_api_token" value=<?php print $pihole_api_token ?> />
 <input type = "hidden" name = "pihole_protocol" value=<?php print $pihole_protocol ?> />
-<input type = "hidden" name = "pihole_port" value=<?php print $pihole_port ?> />
 <input type = "hidden" name = "exporter_port" value=<?php print $exporter_port ?> />
 <input type = "hidden" name = "exporter_interval" value=<?php print $exporter_interval ?> />
 <input type="submit" name="startUP" value="Start" />
@@ -170,9 +169,9 @@ else :
 <h3><strong>Change current Configuration:</strong></h3>
 <form id="s" method="post" >
 <input type = "text" style="width: 100px;" name = "pihole_hostname" placeholder="127.0.0.1" required />
+<input type = "text" style="width: 30px;" name = "pihole_port" placeholder="80" required value=<?php print $pihole_port ?> />
 <input type = "password" style="width: 500px;" name = "pihole_api_token" data-inputmask="mask" placeholder="IE8YTGhm5T1N0GHxZUJx6ZOzN8vhCiFT7feW085ZGiyCNifiyPtzLqJJhe4mw4M9" required />
 <input type = "hidden" name = "pihole_protocol" value=<?php print $pihole_protocol ?> />
-<input type = "hidden" name = "pihole_port" value=<?php print $pihole_port ?> />
 <input type = "hidden" name = "exporter_port" value=<?php print $exporter_port ?>>
 <input type = "hidden" name = "exporter_interval" value=<?php print $exporter_interval ?>>
 <input type="submit" name="changePIHOLEconfig" value="Change & Start">
@@ -183,9 +182,9 @@ else :
 <p style="text-align: center;" font-size="40px">To get your API Token go to your Pi-Hole instance and click on <strong>Settings</strong> -&gt; <strong>API/Webinterface</strong> -&gt; <strong>Show API token</strong> -&gt; <strong>Yes, show API Token</strong></p>
 <form id="s" method="post" >
 <input type = "text" style="width: 100px;" name = "pihole_hostname" placeholder="127.0.0.1" required>
+<input type = "text" style="width: 30px;" name = "pihole_port" placeholder="80" required value=<?php print $pihole_port ?> />
 <input type = "password" style="width: 500px;" name = "pihole_api_token" data-inputmask="mask" placeholder="IE8YTGhm5T1N0GHxZUJx6ZOzN8vhCiFT7feW085ZGiyCNifiyPtzLqJJhe4mw4M9" required>
 <input type = "hidden" name = "pihole_protocol" value=<?php print $pihole_protocol ?>>
-<input type = "hidden" name = "pihole_port" value=<?php print $pihole_port ?>>
 <input type = "hidden" name = "exporter_port" value=<?php print $exporter_port ?>>
 <input type = "hidden" name = "exporter_interval" value=<?php print $exporter_interval ?>>
 <input type="submit" name="changePIHOLEconfig" value="Confirm & Start">
