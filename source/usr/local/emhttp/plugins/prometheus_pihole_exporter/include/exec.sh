@@ -27,6 +27,7 @@ echo -n "$(cat /boot/config/plugins/prometheus_pihole_exporter/settings.cfg | gr
 function change_pihole_settings(){
 sed -i "/pihole_hostname=/c\pihole_hostname=${1}" "/boot/config/plugins/prometheus_pihole_exporter/settings.cfg"
 sed -i "/pihole_api_token=/c\pihole_api_token=${2}" "/boot/config/plugins/prometheus_pihole_exporter/settings.cfg"
+sed -i "/pihole_port=/c\pihole_port=${4}" "/boot/config/plugins/prometheus_pihole_exporter/settings.cfg"
 if [ ! -z "$(pgrep -f prometheus_pihole_exporter_init.sh)" ]; then
   kill $(pgrep -f prometheus_pihole_exporter_init.sh)
 fi
