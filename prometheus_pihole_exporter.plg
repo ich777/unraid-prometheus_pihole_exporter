@@ -2,11 +2,11 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "prometheus_pihole_exporter">
   <!ENTITY author    "ich777">
-  <!ENTITY version   "2021.07.05">
+  <!ENTITY version   "2021.07.09">
   <!ENTITY launch    "Settings/pihole_exporter">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
   <!ENTITY pluginURL "&gitURL;/&name;.plg">
-  <!ENTITY md5       "1701ad232b0add03de0d92ff46bcd0d8">
+  <!ENTITY md5       "ae09e43489bf95a35f584945bc364831">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
@@ -14,6 +14,9 @@
 <PLUGIN  name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/110995-plugin-prometheus-unraid-plugins/">
 
 <CHANGES>
+
+###2021.07.09
+- Fixed non working 'Start' button on plugin page
 
 ###2021.07.05
 - Made port form PiHole WebUI changeable on plugin page
