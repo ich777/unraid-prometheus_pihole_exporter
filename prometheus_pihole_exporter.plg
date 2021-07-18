@@ -75,6 +75,8 @@ if [ -z "$(pidof prometheus_pihole_exporter)" ]; then
     echo
     echo "-------------Starting Prometheus Pi-Hole Exporter!--------------"
     echo "&emhttp;/include/prometheus_pihole_exporter_init.sh $PIH_HOST $PIH_API_TOKEN $PIH_PROTO $PIH_PORT $EXP_PORT $EXP_INTERV" | at now
+  else
+    echo "---Please enter your connection details for PiHole on the plugin configuration page!---"
   fi
 else
   echo
