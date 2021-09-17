@@ -2,11 +2,11 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "prometheus_pihole_exporter">
   <!ENTITY author    "ich777">
-  <!ENTITY version   "2021.07.09">
+  <!ENTITY version   "2021.09.17">
   <!ENTITY launch    "Settings/pihole_exporter">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
   <!ENTITY pluginURL "&gitURL;/&name;.plg">
-  <!ENTITY md5       "ae09e43489bf95a35f584945bc364831">
+  <!ENTITY md5       "06e4b5c1a4d6eec5de5fa181e931e916">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
@@ -14,6 +14,9 @@
 <PLUGIN  name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/110995-plugin-prometheus-unraid-plugins/">
 
 <CHANGES>
+
+###2021.09.17
+- Fixed plugin to escape variables properly
 
 ###2021.07.09
 - Fixed non working 'Start' button on plugin page
