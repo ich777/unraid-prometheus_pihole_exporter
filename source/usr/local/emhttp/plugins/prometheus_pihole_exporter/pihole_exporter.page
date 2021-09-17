@@ -31,7 +31,6 @@ $(function(){
     });
 });
 </script>
-
 <h1 style="text-align: center;"><a target="_blank" rel="noopener"><span style="color: red;">Prometheus Pi-Hole Exporter</span></a></h1>
 <p style="text-align: center;">Prometheus Pi-Hole Exporter takes informations gathered from the Pi-Hole API and provides it to a Prometheus database.<br /><strong>Export URL:</strong> The URL for the exportet metrics is: 'http://YOURunRAIDIP:9617/metrics' (to use it in Prometheus add the target: 'YOURunRAIDIP:9617' to your Prometheus yaml).<br /><em>Usage is not limited to Prometheus only. Data can be formated and displayed to any database or graphical node.</em></p>
 <div style="width: 100%; float:left">
@@ -134,6 +133,7 @@ else :
 <form id="s" method="post" >
 <input type = "hidden" name = "pihole_hostname" value=<?php print $pihole_hostname ?> />
 <input type = "hidden" name = "pihole_api_token" value=<?php print $pihole_api_token ?> />
+<input type = "hidden" name = "pihole_port" value=<?php print $pihole_port ?> />
 <input type = "hidden" name = "pihole_protocol" value=<?php print $pihole_protocol ?> />
 <input type = "hidden" name = "exporter_port" value=<?php print $exporter_port ?> />
 <input type = "hidden" name = "exporter_interval" value=<?php print $exporter_interval ?> />
@@ -200,7 +200,7 @@ $pihole_protocol = $_POST["pihole_protocol"];
 $pihole_port = $_POST["pihole_port"];
 $exporter_port = $_POST["exporter_port"];
 $exporter_interval = $_POST["exporter_interval"];
-shell_exec("/usr/local/emhttp/plugins/prometheus_pihole_exporter/include/exec.sh change_pihole_settings $pihole_hostname $pihole_api_token $pihole_protocol $pihole_port $exporter_port $exporter_interval");
+shell_exec("/usr/local/emhttp/plugins/prometheus_pihole_exporter/include/exec.sh change_pihole_settings ".escapeshellarg($pihole_hostname)." ".escapeshellarg($pihole_api_token)." ".escapeshellarg($pihole_protocol)." ".escapeshellarg($pihole_port)." ".escapeshellarg($exporter_port)." ".escapeshellarg($exporter_interval)."");
 echo '<script>parent.window.location.reload();</script>';
 }
 ?>
@@ -213,7 +213,7 @@ $pihole_protocol = $_POST["pihole_protocol"];
 $pihole_port = $_POST["pihole_port"];
 $exporter_port = $_POST["exporter_port"];
 $exporter_interval = $_POST["exporter_interval"];
-shell_exec("/usr/local/emhttp/plugins/prometheus_pihole_exporter/include/exec.sh start $pihole_hostname $pihole_api_token $pihole_protocol $pihole_port $exporter_port $exporter_interval");
+shell_exec("/usr/local/emhttp/plugins/prometheus_pihole_exporter/include/exec.sh start ".escapeshellarg($pihole_hostname)." ".escapeshellarg($pihole_api_token)." ".escapeshellarg($pihole_protocol)." ".escapeshellarg($pihole_port)." ".escapeshellarg($exporter_port)." ".escapeshellarg($exporter_interval)."");
 echo '<script>parent.window.location.reload();</script>';
 }
 ?>
