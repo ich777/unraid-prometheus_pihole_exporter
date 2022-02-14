@@ -2,11 +2,11 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "prometheus_pihole_exporter">
   <!ENTITY author    "ich777">
-  <!ENTITY version   "2021.12.27">
+  <!ENTITY version   "2021.02.11">
   <!ENTITY launch    "Settings/pihole_exporter">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
   <!ENTITY pluginURL "&gitURL;/&name;.plg">
-  <!ENTITY md5       "1346b08c7a7c67726dce38d436f60459">
+  <!ENTITY md5       "fa633172e90cfaa130d264e797854002">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
@@ -14,6 +14,9 @@
 <PLUGIN  name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/110995-plugin-prometheus-unraid-plugins/">
 
 <CHANGES>
+
+###2021.02.11
+- Bumped version - based on PiHole Exporter v0.2.0
 
 ###2021.12.27
 - Bumped version - based on PiHole Exporter v0.1.1
