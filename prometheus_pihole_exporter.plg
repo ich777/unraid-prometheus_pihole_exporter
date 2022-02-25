@@ -2,11 +2,11 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "prometheus_pihole_exporter">
   <!ENTITY author    "ich777">
-  <!ENTITY version   "2022.02.20">
+  <!ENTITY version   "2022.02.25">
   <!ENTITY launch    "Settings/pihole_exporter">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
   <!ENTITY pluginURL "&gitURL;/&name;.plg">
-  <!ENTITY md5       "60ebccbe324d6227ef675ea7b9c17384">
+  <!ENTITY md5       "460d6a67b48b7ce7641b6bfe6782b7c3">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
@@ -14,6 +14,9 @@
 <PLUGIN  name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/110995-plugin-prometheus-unraid-plugins/">
 
 <CHANGES>
+
+###2022.02.25
+- Fixed startup issue, thanks to Github user maniac-semal for the report
 
 ###2022.02.20
 - Bumped version - based on PiHole Exporter v0.3.0
