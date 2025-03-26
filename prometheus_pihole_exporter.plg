@@ -2,11 +2,11 @@
 <!DOCTYPE PLUGIN [
   <!ENTITY name      "prometheus_pihole_exporter">
   <!ENTITY author    "ich777">
-  <!ENTITY version   "2025.03.06">
+  <!ENTITY version   "2025.03.26">
   <!ENTITY launch    "Settings/pihole_exporter">
   <!ENTITY gitURL    "https://github.com/&author;/unraid-&name;/raw/master">
   <!ENTITY pluginURL "&gitURL;/&name;.plg">
-  <!ENTITY md5       "6325c4a52cc9c6c8dce7b7630dd3b599">
+  <!ENTITY md5       "44e4ca0e9de1b749f2fe91b4d979a620">
   <!ENTITY plugin    "/boot/config/plugins/&name;">
   <!ENTITY emhttp    "/usr/local/emhttp/plugins/&name;">
 ]>
@@ -14,6 +14,9 @@
 <PLUGIN  name="&name;" author="&author;" version="&version;" launch="&launch;" pluginURL="&pluginURL;" min="6.9.0" support="https://forums.unraid.net/topic/110995-plugin-prometheus-unraid-plugins/">
 
 <CHANGES>
+
+###2025.03.26
+- Compatibility update for PiHole Exporter v1.0.1, please note from now on this plugin will only work with PiHole v6+
 
 ###2025.03.06
 - Bumped version - based on PiHole Exporter v1.0.1
@@ -77,17 +80,24 @@ This Plugin is based on pihole-exporter from eko: https://github.com/eko/pihole-
 #Create settings file if not found
 if [ ! -f "&plugin;/settings.cfg" ]; then
   echo 'pihole_hostname=
-pihole_api_token=
+pihole_password=
 pihole_protocol=http
 pihole_port=80
 exporter_interval=10
 exporter_port=9617' > "&plugin;/settings.cfg"
+else
+  sed -i '/^pihole_api_token=/d' "&plugin;/settings.cfg"
+  if ! grep -q "pihole_password=" &plugin;/settings.cfg; then
+    sed -i '$ a\pihole_password=' &plugin;/settings.cfg
+  fi
 fi
+
+
 
 if [ -z "$(pidof prometheus_pihole_exporter)" ]; then
   PIH_HOST="$(cat &plugin;/settings.cfg | grep "pihole_hostname=" | cut -d '=' -f2-)"
   if [ ! -z "${PIH_HOST}" ]; then
-    PIH_API_TOKEN="$(cat &plugin;/settings.cfg | grep "pihole_api_token=" | cut -d '=' -f2-)"
+    PIH_PWD="$(cat &plugin;/settings.cfg | grep "pihole_password=" | cut -d '=' -f2-)"
     PIH_PROTO="$(cat &plugin;/settings.cfg | grep "pihole_protocol=" | cut -d '=' -f2-)"
     PIH_PORT="$(cat &plugin;/settings.cfg | grep "pihole_port=" | cut -d '=' -f2-)"
     EXP_INTERV="$(cat &plugin;/settings.cfg | grep "exporter_interval=" | cut -d '=' -f2-)"
@@ -95,7 +105,7 @@ if [ -z "$(pidof prometheus_pihole_exporter)" ]; then
     #Starting Prometheus Pi-Hole Exporter Daemon
     echo
     echo "-------------Starting Prometheus Pi-Hole Exporter!--------------"
-    echo "&emhttp;/include/prometheus_pihole_exporter_init.sh $PIH_HOST $PIH_API_TOKEN $PIH_PROTO $PIH_PORT $EXP_PORT $EXP_INTERV" | at now
+    echo "&emhttp;/include/prometheus_pihole_exporter_init.sh $PIH_HOST $PIH_PROTO $PIH_PORT $EXP_PORT $EXP_INTERV $PIH_PWD" | at now -M
   else
     echo "---Please enter your connection details for PiHole on the plugin configuration page!---"
   fi
