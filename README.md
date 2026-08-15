@@ -1,3 +1,5 @@
+# DEPRECATED
+
 # Unraid Prometheus Pi-Hole Exporter plugin
 
 This is the repository for the Prometheus Pi-Hole Exporter plugin based on: https://github.com/eko/pihole-exporter
